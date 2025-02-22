@@ -1,0 +1,75 @@
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class CalculadoraTeste {
+    @Test
+    public void testeAdicao() {
+        Calculadora calc = new Calculadora();
+        assertEquals(5, calc.adicao(2, 3), 0); //dois numeros positivos
+        assertEquals(-1.0, calc.adicao(-2, 1), 0); //numero positivo + numero negativo
+        assertEquals(-3.0, calc.adicao(-2, -1), 0); // dois numeros negativos
+        assertEquals(5.0, calc.adicao(5, 0), 0); // numero positivo + zero
+        assertEquals(-5.0, calc.adicao(-5, 0), 0); //numero negativo + zero
+    }
+    @Test
+    public void testeSubtracao() {
+        Calculadora calc = new Calculadora();
+        assertEquals(1.0, calc.subtracao(3, 2), 0); //dois numeros positivos
+        assertEquals(-3.0, calc.subtracao(-2, 1), 0); // um numero negativo e um positivo
+        assertEquals(-1.0, calc.subtracao(-2, -1), 0); //dois numeros negativos
+        assertEquals(-2.0, calc.subtracao(-2, 0), 0);//numero negativo e zero
+        assertEquals(3.0, calc.subtracao(3, 0), 0); //numero positivo e zero
+    }
+    @Test
+    public void testeMultiplicacao() {
+        Calculadora calc = new Calculadora();
+        assertEquals(6.0, calc.multiplicacao(2, 3), 0); //dois numeros positivos
+        assertEquals(-2.0, calc.multiplicacao(-2, 1), 0); //numero positivo e numero negativo
+        assertEquals(2.0, calc.multiplicacao(-2, -1), 0); // dois numeros negativos
+        assertEquals(0.0, calc.multiplicacao(0, 5), 0); // multiplicação por zero
+    }
+    @Test
+    public void testeDivisao() {
+        Calculadora calc = new Calculadora();
+        assertEquals(2.0, calc.divisao(6, 3), 0); // dois numeros positivos
+        assertEquals(-2.5, calc.divisao(-5, 2), 0); // um numero positivo e um negativo
+        assertEquals(2.5, calc.divisao(-5, -2), 0); // dois numeros negativos
+        assertEquals(0.0, calc.divisao(0, 1), 0); //divisao de zero por um numero positivo
+        assertEquals(0.0, calc.divisao(0, -1), 0); //divisao de zero por um numero negativo
+
+
+        // Teste para divisão por zero
+        try {
+            calc.divisao(5, 0);
+            fail("Deveria ter lançado uma exceção para divisão por zero.");
+        } catch (IllegalArgumentException e) {
+            assertEquals("Divisão por zero não é permitida.", e.getMessage());
+        }
+    }
+    @Test
+    public void testeFatorial() {
+        Calculadora calc = new Calculadora();
+        assertEquals(120, calc.fatorial(5));
+        assertEquals(1, calc.fatorial(0));
+        assertEquals(1, calc.fatorial(1));
+
+        // Teste para fatorial de número negativo
+        try {
+            calc.fatorial(-3);
+            fail("Deveria ter lançado uma exceção para fatorial de número negativo.");
+        } catch (IllegalArgumentException e) {
+            assertEquals("Numero negativo.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testePotencia() {
+        Calculadora calc = new Calculadora();
+        assertEquals(8.0, calc.potencia(2, 3), 0); //expoente positivo
+        assertEquals(1.0, calc.potencia(5, 0), 0); //expoente zero
+        assertEquals(0.25, calc.potencia(2, -2), 0); //expoente negativo
+        assertEquals(4, calc.potencia(-2, 2), 0); //expoente par
+        assertEquals(-8, calc.potencia(-2, 3), 0); //expoente impar
+
+    }
+}
